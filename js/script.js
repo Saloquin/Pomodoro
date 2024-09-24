@@ -84,6 +84,6 @@ const reset = () => {
     
     updateProgressCircle(tempTravail, tempTravail);
 
-    document.querySelector("#play i").classList.remove("fa-stop");
-    document.querySelector("#play i").classList.add("fa-play");
+    document.querySelector("#play span").classList.remove("fa-stop");
+    document.querySelector("#play span").classList.add("fa-play");
 };
