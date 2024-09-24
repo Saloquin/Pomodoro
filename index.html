@@ -4,34 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomodoro Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Heebo:wght@100..900&family=Honk&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+Old+Uyghur&family=Playwrite+DE+Grund:wght@100..400&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://kit.fontawesome.com/f20ec02975.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/f20ec02975.js"
+      crossorigin="anonymous"
+    ></script>
     <script defer src="js/script.js"></script>
   </head>
-  <body class="bg-red-700 text-white">
+  <body class="bg-red-700 text-white pt-6" id="background">
     <div class="flex justify-center items-center flex-col m-4">
-      <h1 class="font-bold text-3xl">TIMER POMODORO</h1>
-      <div class="ombre flex flex-row gap-6 border border-1 border-black rounded-xl p-3 px-8 mt-10 text-sm">
+      <h1 class="font-bold text-4xl">TIMER POMODORO</h1>
+      <div
+        class="ombre flex flex-row gap-6 border border-1 border-black rounded-xl p-3 px-8 mt-14 text-sm"
+      >
         <p id="travail">Travail</p>
         <p id="pause">Pause</p>
       </div>
-      <div class="ombre rounded-full border border-1 border-black mt-6 w-64 h-64 flex justify-center items-center">
-        <div class="rounded-full border border-4 border-[#e1f6b9] w-52 h-52 flex justify-center items-center">
-          <p class="text-4xl">
-            00 : 00
-          </p>
-        </div>
+      <div
+        class="ombre rounded-full border border-1 border-black mt-10 w-80 h-80 relative flex justify-center items-center"
+      >
+        <svg width="320" height="320" viewBox="0 0 100 100">
+          <circle
+            cx="50"
+            cy="50"
+            r="38"
+            stroke="#e1f6b9"
+            stroke-width="2"
+            fill="none"
+            id="circle-progress"
+            stroke-dasharray="238.76"
+            stroke-dashoffset="238.76"
+            transform="rotate(-90 50 50)"
+          />
+        </svg>
+        <p id="compteur" class="absolute text-5xl">25:00</p>
       </div>
-      <div>
 
-      <div class="rounded-full border border-4 border-white w-20 h-20 flex justify-center items-center mt-8">
-        <button class="h-full w-full "><i class="fa-solid fa-play fa-2xl"></i></button>
-
+      <div
+        class="rounded-full border border-4 border-white w-24 h-24 flex justify-center items-center mt-14"
+      >
+        <button id="play" class="h-full w-full">
+          <span class="fa-solid fa-play fa-2xl"></span>
+        </button>
       </div>
     </div>
   </body>
