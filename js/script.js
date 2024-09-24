@@ -5,8 +5,13 @@ const compteur = document.getElementById("compteur");
 const background = document.getElementById("background");
 const progressCircle = document.getElementById("circle-progress"); // Cercle de progression
 
-const tempTravail = 25*60;
-const tempPause = 5*60;
+const newTempTravail = document.getElementById("work-time");
+const newTempPause = document.getElementById("pause-time");
+const changeTemps = document.getElementById("saveTimeButton");
+
+
+let tempTravail = 25*60;
+let tempPause = 5*60;
 let isTravail = true;
 let isRunning = false;
 let intervalId = null;
@@ -87,3 +92,29 @@ const reset = () => {
     document.querySelector("#play span").classList.remove("fa-stop");
     document.querySelector("#play span").classList.add("fa-play");
 };
+
+
+const dropdown = FlowbiteInstances.getInstance('Dropdown', 'dropdownTimepicker');
+const $saveTimeButton = document.getElementById('saveTimeButton');
+
+$saveTimeButton.addEventListener('click', function() {
+    // save time code and then hide the dropdown
+    dropdown.hide();
+});
+
+
+changeTemps.addEventListener("click",()=>{
+    tempPause=textToSecondes(newTempPause.value);
+    tempTravail=textToSecondes(newTempTravail.value);
+    reset()
+})
+
+const textToSecondes = (value) =>{
+    const tabValue = value.split(":");
+    const heures = parseInt(tabValue[0]);
+    const minutes = parseInt(tabValue[1]);
+
+    return heures*3600 + minutes*60;
+
+
+}

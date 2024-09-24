@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomodoro Timer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Heebo:wght@100..900&family=Honk&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+Old+Uyghur&family=Playwrite+DE+Grund:wght@100..400&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"
+    ></script>
     <link rel="stylesheet" href="css/style.css" />
     <script
       src="https://kit.fontawesome.com/f20ec02975.js"
@@ -21,6 +26,7 @@
   <body class="bg-red-700 text-white pt-6" id="background">
     <div class="flex justify-center items-center flex-col m-4">
       <h1 class="font-bold text-4xl">TIMER POMODORO</h1>
+
       <div
         class="ombre flex flex-row gap-6 border border-1 border-black rounded-xl p-3 px-8 mt-14 text-sm"
       >
@@ -48,11 +54,118 @@
       </div>
 
       <div
-        class="rounded-full border border-4 border-white w-24 h-24 flex justify-center items-center mt-14"
+        class="rounded-full border border-4 border-white w-24 h-24 flex justify-center items-center mt-10"
       >
         <button id="play" class="h-full w-full">
           <span class="fa-solid fa-play fa-2xl"></span>
         </button>
+      </div>
+      <div>
+        <button
+          id="dropdownTimepickerButton"
+          data-dropdown-toggle="dropdownTimepicker"
+          class="mt-5 text-white bg-black focus:ring-4 focus:outline-none focus:ring-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+          type="button"
+        >
+          Choisir un temps
+          <svg
+            class="w-2.5 h-2.5 ms-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div
+          id="dropdownTimepicker"
+          class="z-10 hidden bg-white rounded-lg shadow w-auto dark:bg-gray-700 p-3"
+        >
+          <div class="max-w-[16rem] mx-auto grid grid-cols-2 gap-4 mb-2">
+            <div>
+              <label
+                for="work-time"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Temps de travail :</label
+              >
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
+                >
+                  <svg
+                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="time"
+                  id="work-time"
+                  class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value="00:25"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="pause-time"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Temps de pause :</label
+              >
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
+                >
+                  <svg
+                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="time"
+                  id="pause-time"
+                  class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value="00:05"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            id="saveTimeButton"
+            type="button"
+            class="text-blue-700 dark:text-blue-500 text-sm hover:underline p-0"
+          >
+            Sauvegarder
+          </button>
+        </div>
       </div>
     </div>
   </body>
