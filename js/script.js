@@ -15,23 +15,23 @@ let tempPause;
 
 // Fonction pour vérifier si la valeur est un nombre valide
 function isValidNumber(value) {
-    return !isNaN(value) && value !== null && value !== '';
+  return !isNaN(value) && value !== null && value !== '';
 }
 
 // Vérifier si 'workTime' existe dans le localStorage et est un nombre valide
 let workTimeValue = localStorage.getItem('workTime');
 if (isValidNumber(workTimeValue)) {
-    tempTravail = parseInt(workTimeValue, 10);
+  tempTravail = parseInt(workTimeValue, 10);
 } else {
-    tempTravail = 25 * 60; // Valeur par défaut de 25 minutes (en secondes)
+  tempTravail = 25 * 60; // Valeur par défaut de 25 minutes (en secondes)
 }
 
 // Vérifier si 'pauseTime' existe dans le localStorage et est un nombre valide
 let pauseTimeValue = localStorage.getItem('pauseTime');
 if (isValidNumber(pauseTimeValue)) {
-    tempPause = parseInt(pauseTimeValue, 10);
+  tempPause = parseInt(pauseTimeValue, 10);
 } else {
-    tempPause = 5 * 60; // Valeur par défaut de 5 minutes (en secondes)
+  tempPause = 5 * 60; // Valeur par défaut de 5 minutes (en secondes)
 }
 
 let isTravail = true;
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   changeTemps.addEventListener("click", () => {
     tempPause = textToSecondes(newTempPause.value);
     tempTravail = textToSecondes(newTempTravail.value);
-    
+
     // Sauvegarder les temps dans le localStorage
     localStorage.setItem('workTime', tempTravail);
     localStorage.setItem('pauseTime', tempPause);
@@ -98,7 +98,7 @@ const playChrono = () => {
         pause.style.color = "#facc15";
       }
     } else {
-      if (tempsActuel === 10) {
+      if (tempsActuel === 5) {
         alertSound.play(); // Jouer le son d'alerte
       }
       tempsActuel--;
