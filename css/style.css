@@ -87,3 +87,8 @@ body {
 #saveTimeButton:hover::before {
   transform: translate(-50%, 0) scaleX(1);
 }
+
+
+#circle-progress {
+  transition: stroke-dashoffset 0.2s linear;
+}

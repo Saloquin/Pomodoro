@@ -11,14 +11,15 @@ const newTempPause = document.getElementById("pause-time");
 const changeTemps = document.getElementById("saveTimeButton");
 
 // Initialisation des variables de temps
-let tempTravail = 25 * 60;
-let tempPause = 5 * 60;
+let tempTravail = localStorage.getItem('workTime') ?? 25 * 60;
+let tempPause = localStorage.getItem('pauseTime') ?? 5 * 60;
+/*newTempTravail.value=tempTravail;
+newTempPause.value=tempPause;*/
 let isTravail = true;
 let isRunning = false;
 let intervalId = null;
 
 // Sélection des éléments pour le timepicker
-const saveTimeButton = document.getElementById("saveTimeButton");
 const dropdown = document.getElementById("dropdownTimepicker");
 
 // Événements à charger une fois le DOM complètement chargé
@@ -40,16 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Gestion du clic sur le bouton de sauvegarde du temps
-  saveTimeButton.addEventListener("click", function () {
-    dropdown.classList.toggle("hidden");
-  });
-
   // Gestion du changement de temps de travail et de pause
   changeTemps.addEventListener("click", () => {
     tempPause = textToSecondes(newTempPause.value);
     tempTravail = textToSecondes(newTempTravail.value);
+
+    // Sauvegarder les temps dans le localStorage
+    localStorage.setItem('workTime', tempTravail);
+    localStorage.setItem('pauseTime', tempPause);
+
     reset();
+
+    dropdown.classList.toggle("hidden");
   });
 });
 
