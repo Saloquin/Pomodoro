@@ -5,16 +5,35 @@ const pause = document.getElementById("pause");
 const compteur = document.getElementById("compteur");
 const background = document.getElementById("background");
 const progressCircle = document.getElementById("circle-progress"); // Cercle de progression
-
+const alertSound = document.getElementById("alert-sound");
 const newTempTravail = document.getElementById("work-time");
 const newTempPause = document.getElementById("pause-time");
 const changeTemps = document.getElementById("saveTimeButton");
 
-// Initialisation des variables de temps
-let tempTravail = localStorage.getItem('workTime') ?? 25 * 60;
-let tempPause = localStorage.getItem('pauseTime') ?? 5 * 60;
-/*newTempTravail.value=tempTravail;
-newTempPause.value=tempPause;*/
+let tempTravail;
+let tempPause;
+
+// Fonction pour vérifier si la valeur est un nombre valide
+function isValidNumber(value) {
+    return !isNaN(value) && value !== null && value !== '';
+}
+
+// Vérifier si 'workTime' existe dans le localStorage et est un nombre valide
+let workTimeValue = localStorage.getItem('workTime');
+if (isValidNumber(workTimeValue)) {
+    tempTravail = parseInt(workTimeValue, 10);
+} else {
+    tempTravail = 25 * 60; // Valeur par défaut de 25 minutes (en secondes)
+}
+
+// Vérifier si 'pauseTime' existe dans le localStorage et est un nombre valide
+let pauseTimeValue = localStorage.getItem('pauseTime');
+if (isValidNumber(pauseTimeValue)) {
+    tempPause = parseInt(pauseTimeValue, 10);
+} else {
+    tempPause = 5 * 60; // Valeur par défaut de 5 minutes (en secondes)
+}
+
 let isTravail = true;
 let isRunning = false;
 let intervalId = null;
@@ -25,6 +44,8 @@ const dropdown = document.getElementById("dropdownTimepicker");
 // Événements à charger une fois le DOM complètement chargé
 document.addEventListener("DOMContentLoaded", () => {
   // Affichage initial du compteur et du cercle de progression
+  newTempTravail.value = convertSecondsToTime(tempTravail);
+  newTempPause.value = convertSecondsToTime(tempPause);
   compteur.textContent = secondesToMinutes(tempTravail);
   updateProgressCircle(tempTravail, tempTravail);
 
@@ -45,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   changeTemps.addEventListener("click", () => {
     tempPause = textToSecondes(newTempPause.value);
     tempTravail = textToSecondes(newTempTravail.value);
-
+    
     // Sauvegarder les temps dans le localStorage
     localStorage.setItem('workTime', tempTravail);
     localStorage.setItem('pauseTime', tempPause);
@@ -77,6 +98,9 @@ const playChrono = () => {
         pause.style.color = "#facc15";
       }
     } else {
+      if (tempsActuel === 10) {
+        alertSound.play(); // Jouer le son d'alerte
+      }
       tempsActuel--;
     }
 
@@ -129,3 +153,11 @@ const textToSecondes = (value) => {
 
   return heures * 3600 + minutes * 60;
 };
+
+function convertSecondsToTime(seconds) {
+  const hours = Math.floor(seconds / 3600); // Obtenir les heures
+  const minutes = Math.floor((seconds % 3600) / 60); // Obtenir les minutes restantes
+  const formattedHours = String(hours).padStart(2, '0'); // Format HH
+  const formattedMinutes = String(minutes).padStart(2, '0'); // Format MM
+  return `${formattedHours}:${formattedMinutes}`;
+}
