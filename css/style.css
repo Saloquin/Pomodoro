@@ -1,6 +1,7 @@
 body {
   font-family: "Heebo", sans-serif;
 }
+
 .ombre {
   box-shadow: 0 0 15px #000000;
 }
@@ -21,16 +22,20 @@ body {
 }
 
 @keyframes jelly {
+
   0%,
   100% {
     transform: scale(1, 1);
   }
+
   25% {
     transform: scale(0.9, 1.1);
   }
+
   50% {
     transform: scale(1.1, 0.9);
   }
+
   75% {
     transform: scale(0.95, 1.05);
   }
