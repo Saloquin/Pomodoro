@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/Pomodoro/', // Ajout de la base URL pour GitHub Pages
   plugins: [
     vue(),
   ],
