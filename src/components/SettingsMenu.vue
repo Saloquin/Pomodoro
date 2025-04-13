@@ -22,27 +22,42 @@ const props = defineProps({
 const emit = defineEmits([
   'update:workTime',
   'update:pauseTime',
-  'update:soundVolume'
+  'update:soundVolume',
+  'timer-update'
 ]);
 
 // Auto-save when work time or pause time changes
 watch(() => props.workTime, (newValue) => {
-  const minutes = parseTimeString(newValue);
-  timerUpdate(minutes);
+  const [hours, minutes] = newValue.split(':').map(Number);
+  if (!isNaN(hours) && !isNaN(minutes)) {
+    const totalMinutes = (hours * 60) + minutes;
+    if (totalMinutes > 0) {
+      emit('timer-update', totalMinutes);
+    }
+  }
 });
 
 watch(() => props.pauseTime, (newValue) => {
-  const minutes = parseTimeString(newValue);
-  timerUpdate(minutes);
+  const [hours, minutes] = newValue.split(':').map(Number);
+  if (!isNaN(hours) && !isNaN(minutes)) {
+    const totalMinutes = (hours * 60) + minutes;
+    if (totalMinutes > 0) {
+      emit('timer-update', totalMinutes);
+    }
+  }
 });
 
-const parseTimeString = (timeString) => {
-  const [hours, minutes] = timeString.split(':').map(Number);
-  return hours * 60 + minutes;
-};
-
-const timerUpdate = (minutes) => {
-  emit('timer-update', minutes);
+const handleTimeInput = (event, type) => {
+  const value = event.target.value;
+  emit(`update:${type}`, value);
+  
+  const [hours, minutes] = value.split(':').map(Number);
+  if (!isNaN(hours) && !isNaN(minutes)) {
+    const totalMinutes = (hours * 60) + minutes;
+    if (totalMinutes > 0) {
+      emit('timer-update', totalMinutes);
+    }
+  }
 };
 
 // Pour s'assurer que le thème est appliqué quand il change
@@ -84,8 +99,7 @@ const localCustomTheme = ref({
   secondaryColor: themeStore.customTheme.secondaryColor,
   accentColor: themeStore.customTheme.accentColor,
   backgroundImage: themeStore.customTheme.backgroundImage,
-  alarmSound: themeStore.customTheme.alarmSound,
-  backgroundSound: themeStore.customTheme.backgroundSound,
+  alarmSound: themeStore.customTheme.alarmSound
 });
 
 // Pour s'assurer que localCustomTheme est synchronisé quand on bascule entre personnalisé et prédéfini
@@ -95,8 +109,7 @@ watch(() => themeStore.showCustomTheme, () => {
     secondaryColor: themeStore.customTheme.secondaryColor,
     accentColor: themeStore.customTheme.accentColor,
     backgroundImage: themeStore.customTheme.backgroundImage,
-    alarmSound: themeStore.customTheme.alarmSound,
-    backgroundSound: themeStore.customTheme.backgroundSound,
+    alarmSound: themeStore.customTheme.alarmSound
   };
 });
 
@@ -112,8 +125,7 @@ const resetTheme = () => {
     secondaryColor: themeStore.customTheme.secondaryColor,
     accentColor: themeStore.customTheme.accentColor,
     backgroundImage: themeStore.customTheme.backgroundImage,
-    alarmSound: themeStore.customTheme.alarmSound,
-    backgroundSound: themeStore.customTheme.backgroundSound,
+    alarmSound: themeStore.customTheme.alarmSound
   };
 };
 
@@ -144,7 +156,7 @@ const resetTheme = () => {
               type="time"
               id="work-time"
               :value="workTime"
-              @input="$emit('update:workTime', $event.target.value)"
+              @input="handleTimeInput($event, 'workTime')"
               class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5"
             />
           </div>
@@ -154,7 +166,7 @@ const resetTheme = () => {
               type="time"
               id="pause-time"
               :value="pauseTime"
-              @input="$emit('update:pauseTime', $event.target.value)"
+              @input="handleTimeInput($event, 'pauseTime')"
               class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5"
             />
           </div>
@@ -269,20 +281,6 @@ const resetTheme = () => {
                 Test
               </button>
             </div>
-          </div>
-
-          <div>
-            <label class="block text-xs text-white mb-1">Son d'arrière-plan</label>
-            <select 
-              v-model="localCustomTheme.backgroundSound"
-              class="bg-gray-700 text-white p-1.5 rounded w-full text-sm"
-              @change="updateTheme"
-            >
-              <option value="">Aucun son</option>
-              <option value="/sound/background/nature.mp3">Nature</option>
-              <option value="/sound/background/rain.mp3">Pluie</option>
-              <option value="/sound/background/cafe.mp3">Café</option>
-            </select>
           </div>
         </div>
       </div>

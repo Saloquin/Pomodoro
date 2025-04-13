@@ -5,42 +5,58 @@ import TimerTheme from '@/components/TimerTheme.vue';
 import StateIndicator from '@/components/StateIndicator.vue';
 import SettingsMenu from '@/components/SettingsMenu.vue';
 import TimerText from '@/components/TimerText.vue';
+import ThemeGifs from '@/components/ThemeGifs.vue';
 
 const themeStore = useThemeStore();
 
 // États
 const savedSettings = JSON.parse(localStorage.getItem('pomodoroSettings')) || {};
-const isWorking = ref(savedSettings.isWorking ?? true);
-const timer = ref(savedSettings.currentTime || '25:00');
-const progress = ref(savedSettings.progress || 0);
+const isWorking = ref(true);
+const timer = ref('25:00');
+const progress = ref(0);
 const workTime = ref(savedSettings.workTime || '00:25');
 const pauseTime = ref(savedSettings.pauseTime || '00:05');
 const soundVolume = ref(savedSettings.soundVolume || 50);
 
 // Sauvegarder les paramètres quand ils changent
-watch([workTime, pauseTime, soundVolume, isWorking, timer, progress], () => {
+watch([workTime, pauseTime, soundVolume], () => {
+  const settings = JSON.parse(localStorage.getItem('pomodoroSettings')) || {};
   localStorage.setItem('pomodoroSettings', JSON.stringify({
+    ...settings,
     workTime: workTime.value,
     pauseTime: pauseTime.value,
-    soundVolume: soundVolume.value,
-    isWorking: isWorking.value,
-    currentTime: timer.value,
-    progress: progress.value
+    soundVolume: soundVolume.value
   }));
-}, { deep: true });
+});
 
 // Refs pour le composant Timer
 const timerComponent = ref(null);
-const backgroundAudio = ref(null);
 
 onMounted(() => {
   // Initialiser le thème au chargement
   themeStore.setTheme(themeStore.currentTheme);
-  initBackgroundSound();
   
-  // Initialiser le timer avec le temps de travail par défaut
-  const initialMinutes = parseTimeString(workTime.value);
-  timerComponent.value?.resetTimer(initialMinutes);
+  // Avertir lors de l'actualisation
+  window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = 'Attention : voulez-vous vraiment recharger la page ? Votre temps de travail sera perdu.';
+  });
+
+  // Restaurer les paramètres sauvegardés
+  if (savedSettings.workTime) {
+    workTime.value = savedSettings.workTime;
+  }
+  if (savedSettings.pauseTime) {
+    pauseTime.value = savedSettings.pauseTime;
+  }
+  if (savedSettings.soundVolume !== undefined) {
+    soundVolume.value = savedSettings.soundVolume;
+  }
+
+  // Initialiser le timer avec le temps de travail actuel
+  const [hours, minutes] = workTime.value.split(':').map(Number);
+  const totalMinutes = (hours * 60) + minutes;
+  timerComponent.value?.resetTimer(totalMinutes);
 });
 
 const playAlertSound = () => {
@@ -57,7 +73,8 @@ const handleTimerComplete = () => {
 
 const parseTimeString = (timeString) => {
   const [hours, minutes] = timeString.split(':').map(Number);
-  return hours * 60 + minutes;
+  const totalMinutes = (hours * 60) + minutes;
+  return totalMinutes;
 };
 
 const switchMode = () => {
@@ -77,32 +94,17 @@ const switchMode = () => {
   timerComponent.value?.resetTimer(minutes);
 };
 
-const initBackgroundSound = () => {
-  if (backgroundAudio.value) {
-    backgroundAudio.value.pause();
-    backgroundAudio.value = null;
-  }
-  
-  if (themeStore.activeTheme.backgroundSound) {
-    backgroundAudio.value = new Audio(themeStore.activeTheme.backgroundSound);
-    backgroundAudio.value.loop = true;
-    backgroundAudio.value.play();
-  }
-};
-
-watch(() => themeStore.activeTheme.backgroundSound, initBackgroundSound);
-
 // Écouter les changements de temps
 const handleTimerUpdate = (minutes) => {
-  timerComponent.value?.resetTimer(minutes);
+  // S'assurer que minutes est un nombre
+  const minutesNum = Number(minutes);
+  if (!isNaN(minutesNum) && minutesNum > 0) {
+    timerComponent.value?.resetTimer(minutesNum);
+  }
 };
 
 // Nettoyage du timer avant la destruction du composant
 onBeforeUnmount(() => {
-  if (backgroundAudio.value) {
-    backgroundAudio.value.pause();
-    backgroundAudio.value = null;
-  }
   timerComponent.value?.cleanup();
 });
 </script>
@@ -121,17 +123,23 @@ onBeforeUnmount(() => {
 
       <StateIndicator :is-working="isWorking" />
 
-      <TimerTheme 
-        :timer="timer"
-        :progress="progress"
-      />
+      <div class="flex justify-center items-center relative w-full">
+        <ThemeGifs :gifs="themeStore.activeTheme.gifs" />
+        
+        <div class="flex flex-col items-center">
+          <TimerTheme 
+            :timer="timer"
+            :progress="progress"
+          />
 
-      <TimerText
-        ref="timerComponent"
-        @update-timer="newTime => timer = newTime"
-        @update-progress="newProgress => progress = newProgress"
-        @timer-complete="handleTimerComplete"
-      />
+          <TimerText
+            ref="timerComponent"
+            @update-timer="newTime => timer = newTime"
+            @update-progress="newProgress => progress = newProgress"
+            @timer-complete="handleTimerComplete"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -15,7 +15,7 @@ export const useThemeStore = defineStore('themes', () => {
     accentColor: savedState.customTheme?.accentColor || '#facc15',
     backgroundImage: savedState.customTheme?.backgroundImage || null,
     alarmSound: savedState.customTheme?.alarmSound || '/sound/alarm/phoneBell.mp3',
-    backgroundSound: savedState.customTheme?.backgroundSound || null
+    gifs: savedState.customTheme?.gifs || []
   });
 
   const predefinedThemes = {
@@ -25,8 +25,8 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#1B5E20',
       accentColor: '#FFEB3B',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/phoneBell.mp3',
-      backgroundSound: null
+      alarmSound: '/sound/alarm/firecamp.mp3',
+      gifs: []
     },
     ocean: {
       name: 'Océan',
@@ -34,8 +34,8 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#0D47A1',
       accentColor: '#FFF176',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/phoneBell.mp3',
-      backgroundSound: null
+      alarmSound: '/sound/alarm/chill.mp3',
+      gifs: []
     },
     minimal: {
       name: 'Minimal',
@@ -43,8 +43,8 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#212121',
       accentColor: '#FFFFFF',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/phoneBell.mp3',
-      backgroundSound: null
+      alarmSound: '/sound/alarm/notif.mp3',
+      gifs: []
     },
     sunset: {
       name: 'Coucher de soleil',
@@ -52,8 +52,8 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#B71C1C',
       accentColor: '#FFEB3B',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/phoneBell.mp3',
-      backgroundSound: null
+      alarmSound: '/sound/alarm/star.mp3',
+      gifs: []
     },
     forest: {
       name: 'Forêt',
@@ -61,8 +61,8 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#1B3D1B',
       accentColor: '#FFB74D',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/firecamp.mp3',
-      backgroundSound: null
+      alarmSound: '/sound/alarm/forest.mp3',
+      gifs: []
     },
     purple: {
       name: 'Violet',
@@ -70,8 +70,8 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#4A148C',
       accentColor: '#64FFDA',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/phoneBell.mp3',
-      backgroundSound: null
+      alarmSound: '/sound/alarm/magic.mp3',
+      gifs: []
     },
     midnight: {
       name: 'Minuit',
@@ -80,7 +80,7 @@ export const useThemeStore = defineStore('themes', () => {
       accentColor: '#90CAF9',
       backgroundImage: null,
       alarmSound: '/sound/alarm/galaxy.mp3',
-      backgroundSound: null
+      gifs: []
     },
     animalCrossing: {
       name: 'Animal Crossing',
@@ -89,7 +89,7 @@ export const useThemeStore = defineStore('themes', () => {
       accentColor: '#FFEB3B',
       backgroundImage: '/themes/acnh.png',
       alarmSound: '/sound/alarm/acnh.mp3',
-      backgroundSound: null
+      gifs: ['/gif/acnh.gif']
     },
     zelda: {
       name: 'Zelda',
@@ -98,7 +98,7 @@ export const useThemeStore = defineStore('themes', () => {
       accentColor: '#FFEB3B',
       backgroundImage: '/themes/zelda.jpg',
       alarmSound: '/sound/alarm/zelda.mp3',
-      backgroundSound: null
+      gifs: ['/gif/link.gif', '/gif/korogu.gif']
     },
   };
 
@@ -108,7 +108,7 @@ export const useThemeStore = defineStore('themes', () => {
     accentColor: '#facc15',
     backgroundImage: null,
     alarmSound: '/sound/alarm/phoneBell.mp3',
-    backgroundSound: null
+    gifs: []
   };
 
   // Sauvegarder l'état dans le localStorage à chaque changement
@@ -158,7 +158,6 @@ export const useThemeStore = defineStore('themes', () => {
       }
 
       currentAlarmSound.value = themeToApply.alarmSound;
-      currentBackgroundSound.value = themeToApply.backgroundSound;
     }
   };
 
@@ -177,7 +176,6 @@ export const useThemeStore = defineStore('themes', () => {
   };
 
   const currentAlarmSound = ref(null);
-  const currentBackgroundSound = ref(null);
 
   const activeTheme = computed(() => {
     return showCustomTheme.value ? customTheme.value : predefinedThemes[currentTheme.value];
@@ -194,7 +192,6 @@ export const useThemeStore = defineStore('themes', () => {
     toggleThemeMode,
     activeTheme,
     currentAlarmSound,
-    currentBackgroundSound,
     resetCustomTheme
   };
 });
