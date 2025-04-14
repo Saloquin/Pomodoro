@@ -3,20 +3,11 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-  base: '/Pomodoro/',
+  base: '/',
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      'vue': 'vue/dist/vue.esm-bundler.js',
-      '@fortawesome': fileURLToPath(new URL('./node_modules/@fortawesome', import.meta.url))
-    }
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        main: fileURLToPath(new URL('./index.html', import.meta.url))
-      }
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   }
 })
