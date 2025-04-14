@@ -1,7 +1,7 @@
 import './assets/main.css'
 import './assets/fontawesome.min.css'
 
-import { createApp } from 'vue'
+import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
