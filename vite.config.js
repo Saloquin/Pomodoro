@@ -15,6 +15,14 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url))
+      },
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.ttf') || assetInfo.name.endsWith('.woff2')) {
+            return 'assets/fonts/[name][extname]'
+          }
+          return 'assets/[name]-[hash][extname]'
+        }
       }
     }
   }
