@@ -66,24 +66,24 @@ watch(() => themeStore.currentTheme, (newTheme) => {
 }, { immediate: true });
 
 const alarmSounds = [
-  { name: 'Chill', path: '/sound/alarm/chill.mp3' },
-  { name: 'Cute', path: '/sound/alarm/Cute.mp3' },
-  { name: 'Feu de camp', path: '/sound/alarm/firecamp.mp3' },
-  { name: 'Galaxy', path: '/sound/alarm/galaxy.mp3' },
-  { name: 'Grove', path: '/sound/alarm/grove.mp3' },
-  { name: 'Ice Cream', path: '/sound/alarm/iceCream.mp3' },
-  { name: 'Kawaii', path: '/sound/alarm/kawaii.mp3' },
-  { name: 'Magic', path: '/sound/alarm/magic.mp3' },
-  { name: 'Notification', path: '/sound/alarm/notif.mp3' },
-  { name: 'Phone', path: '/sound/alarm/phoneBell.mp3' },
-  { name: 'Tirelire', path: '/sound/alarm/piggyBank.mp3' },
-  { name: 'Pompom', path: '/sound/alarm/pompom.mp3' },
-  { name: 'Pop', path: '/sound/alarm/pop.mp3' },
-  { name: 'Reverb', path: '/sound/alarm/Reverb.mp3' },
-  { name: 'Shooting Star', path: '/sound/alarm/shootingStar.mp3' },
-  { name: 'Star', path: '/sound/alarm/star.mp3' },
-  { name: 'Sweet', path: '/sound/alarm/Sweet.mp3' },
-  { name: 'Treasure', path: '/sound/alarm/Treasure.mp3' }
+  { name: 'Chill', path: '/Pomodoro/sound/alarm/chill.mp3' },
+  { name: 'Cute', path: '/Pomodoro/sound/alarm/Cute.mp3' },
+  { name: 'Feu de camp', path: '/Pomodoro/sound/alarm/firecamp.mp3' },
+  { name: 'Galaxy', path: '/Pomodoro/sound/alarm/galaxy.mp3' },
+  { name: 'Grove', path: '/Pomodoro/sound/alarm/grove.mp3' },
+  { name: 'Ice Cream', path: '/Pomodoro/sound/alarm/iceCream.mp3' },
+  { name: 'Kawaii', path: '/Pomodoro/sound/alarm/kawaii.mp3' },
+  { name: 'Magic', path: '/Pomodoro/sound/alarm/magic.mp3' },
+  { name: 'Notification', path: '/Pomodoro/sound/alarm/notif.mp3' },
+  { name: 'Phone', path: '/Pomodoro/sound/alarm/phoneBell.mp3' },
+  { name: 'Tirelire', path: '/Pomodoro/sound/alarm/piggyBank.mp3' },
+  { name: 'Pompom', path: '/Pomodoro/sound/alarm/pompom.mp3' },
+  { name: 'Pop', path: '/Pomodoro/sound/alarm/pop.mp3' },
+  { name: 'Reverb', path: '/Pomodoro/sound/alarm/Reverb.mp3' },
+  { name: 'Shooting Star', path: '/Pomodoro/sound/alarm/shootingStar.mp3' },
+  { name: 'Star', path: '/Pomodoro/sound/alarm/star.mp3' },
+  { name: 'Sweet', path: '/Pomodoro/sound/alarm/Sweet.mp3' },
+  { name: 'Treasure', path: '/Pomodoro/sound/alarm/Treasure.mp3' }
 ];
 
 const previewSound = (soundPath) => {
