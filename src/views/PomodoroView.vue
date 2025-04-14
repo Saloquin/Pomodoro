@@ -80,16 +80,6 @@ const parseTimeString = (timeString) => {
 const switchMode = () => {
   isWorking.value = !isWorking.value;
   
-  // Inverser les couleurs primary et secondary
-  const theme = themeStore.activeTheme;
-  if (!isWorking.value) {
-    document.documentElement.style.setProperty('--primary', theme.secondaryColor);
-    document.documentElement.style.setProperty('--secondary', theme.primaryColor);
-  } else {
-    document.documentElement.style.setProperty('--primary', theme.primaryColor);
-    document.documentElement.style.setProperty('--secondary', theme.secondaryColor);
-  }
-  
   const minutes = parseTimeString(isWorking.value ? workTime.value : pauseTime.value);
   timerComponent.value?.resetTimer(minutes);
 };

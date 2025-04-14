@@ -100,6 +100,15 @@ export const useThemeStore = defineStore('themes', () => {
       alarmSound: '/sound/alarm/zelda.mp3',
       gifs: ['/gif/link.gif', '/gif/korogu.gif']
     },
+    undertale: {
+      name: 'Undertale',
+      primaryColor: '#FF4081',
+      secondaryColor: '#3F51B5',
+      accentColor: '#FFEB3B',
+      backgroundImage: '/themes/undertale.png',
+      alarmSound: '/sound/alarm/undertale.mp3',
+      gifs: ['/gif/undertale.gif']
+    },
   };
 
   const defaultTheme = {
@@ -135,18 +144,9 @@ export const useThemeStore = defineStore('themes', () => {
     const themeToApply = showCustomTheme.value ? customTheme.value : predefinedThemes[themeName];
     
     if (themeToApply) {
-      // Récupérer l'état actuel
-      const savedSettings = JSON.parse(localStorage.getItem('pomodoroSettings')) || {};
-      const isWorking = savedSettings.isWorking ?? true;
-      
-      // Appliquer les couleurs en fonction de l'état
-      if (!isWorking) {
-        document.documentElement.style.setProperty('--primary', themeToApply.secondaryColor);
-        document.documentElement.style.setProperty('--secondary', themeToApply.primaryColor);
-      } else {
-        document.documentElement.style.setProperty('--primary', themeToApply.primaryColor);
-        document.documentElement.style.setProperty('--secondary', themeToApply.secondaryColor);
-      }
+      // Appliquer les couleurs directement sans inversion
+      document.documentElement.style.setProperty('--primary', themeToApply.primaryColor);
+      document.documentElement.style.setProperty('--secondary', themeToApply.secondaryColor);
       document.documentElement.style.setProperty('--accent', themeToApply.accentColor);
       
       if (themeToApply.backgroundImage) {
