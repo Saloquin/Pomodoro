@@ -8,21 +8,14 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      'vue': 'vue/dist/vue.esm-bundler.js'
+      'vue': 'vue/dist/vue.esm-bundler.js',
+      '@fortawesome': fileURLToPath(new URL('./node_modules/@fortawesome', import.meta.url))
     }
   },
   build: {
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url))
-      },
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.ttf') || assetInfo.name.endsWith('.woff2')) {
-            return 'assets/fonts/[name][extname]'
-          }
-          return 'assets/[name]-[hash][extname]'
-        }
       }
     }
   }
