@@ -25,7 +25,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#1B5E20',
       accentColor: '#FFEB3B',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/firecamp.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/firecamp.mp3',
       gifs: []
     },
     ocean: {
@@ -34,7 +34,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#0D47A1',
       accentColor: '#FFF176',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/chill.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/chill.mp3',
       gifs: []
     },
     minimal: {
@@ -43,7 +43,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#212121',
       accentColor: '#FFFFFF',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/notif.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/notif.mp3',
       gifs: []
     },
     sunset: {
@@ -52,7 +52,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#B71C1C',
       accentColor: '#FFEB3B',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/star.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/star.mp3',
       gifs: []
     },
     forest: {
@@ -61,7 +61,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#1B3D1B',
       accentColor: '#FFB74D',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/forest.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/forest.mp3',
       gifs: []
     },
     purple: {
@@ -70,7 +70,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#4A148C',
       accentColor: '#64FFDA',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/magic.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/magic.mp3',
       gifs: []
     },
     midnight: {
@@ -79,7 +79,7 @@ export const useThemeStore = defineStore('themes', () => {
       secondaryColor: '#1A237E',
       accentColor: '#90CAF9',
       backgroundImage: null,
-      alarmSound: '/sound/alarm/galaxy.mp3',
+      alarmSound: '/Pomodoro/sound/alarm/galaxy.mp3',
       gifs: []
     },
     animalCrossing: {
@@ -87,27 +87,27 @@ export const useThemeStore = defineStore('themes', () => {
       primaryColor: '#FFAB40',
       secondaryColor: '#4CAF50',
       accentColor: '#FFEB3B',
-      backgroundImage: '/themes/acnh.png',
-      alarmSound: '/sound/alarm/acnh.mp3',
-      gifs: ['/gif/acnh.gif']
+      backgroundImage: '/Pomodoro/themes/acnh.png',
+      alarmSound: '/Pomodoro/sound/alarm/acnh.mp3',
+      gifs: ['/Pomodoro/gif/acnh.gif']
     },
     zelda: {
       name: 'Zelda',
       primaryColor: '#FF5722',
       secondaryColor: '#4CAF50',
       accentColor: '#FFEB3B',
-      backgroundImage: '/themes/zelda.jpg',
-      alarmSound: '/sound/alarm/zelda.mp3',
-      gifs: ['/gif/link.gif', '/gif/korogu.gif']
+      backgroundImage: '/Pomodoro/themes/zelda.jpg',
+      alarmSound: '/Pomodoro/sound/alarm/zelda.mp3',
+      gifs: ['/Pomodoro/gif/link.gif', '/Pomodoro/gif/korogu.gif']
     },
     undertale: {
       name: 'Undertale',
       primaryColor: '#FF4081',
       secondaryColor: '#3F51B5',
       accentColor: '#FFEB3B',
-      backgroundImage: '/themes/undertale.png',
-      alarmSound: '/sound/alarm/undertale.mp3',
-      gifs: ['/gif/undertale.gif']
+      backgroundImage: '/Pomodoro/themes/undertale.png',
+      alarmSound: '/Pomodoro/sound/alarm/undertale.mp3',
+      gifs: ['/Pomodoro/gif/undertale.gif']
     },
   };
 
@@ -116,7 +116,7 @@ export const useThemeStore = defineStore('themes', () => {
     secondaryColor: '#0e7490',
     accentColor: '#facc15',
     backgroundImage: null,
-    alarmSound: '/sound/alarm/phoneBell.mp3',
+    alarmSound: '/Pomodoro/sound/alarm/phoneBell.mp3',
     gifs: []
   };
 
